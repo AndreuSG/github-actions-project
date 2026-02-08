@@ -2,6 +2,10 @@ name: CD Hangman Frontend
 
 on: workflow_dispatch
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   cd:
     runs-on: ubuntu-latest
