@@ -1,0 +1,14 @@
+name: CI Hangman Frontend
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'hangman-front/**'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Pull Request detected with changes in hangman-front"
