@@ -2,13 +2,33 @@ name: CI Hangman Frontend
 
 on:
   pull_request:
-    branches:
-      - main
     paths:
       - 'hangman-front/**'
 
 jobs:
   ci:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: hangman-front
+
     steps:
-      - run: echo "Pull Request detected with changes in hangman-front"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: hangman-front/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Run unit tests
+        run: npm test
